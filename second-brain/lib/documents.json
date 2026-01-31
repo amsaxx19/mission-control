@@ -1,0 +1,198 @@
+[
+  {
+    "id": "daily/2026-02-01",
+    "slug": "2026-02-01",
+    "title": "Daily Journal - February 1, 2026",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "daily",
+    "content": "\n# Daily Journal — February 1, 2026\n\n## Summary\n\nFirst day of the new autonomous system. Amos wants me to act as a proactive employee, building things every night while he sleeps. We also established the 2nd Brain system for knowledge management.\n\n## Conversations\n\n### Morning\n- Initial greeting and system reset\n- Quick check-in\n\n### Evening\n- Amos asked me to be more proactive — monitor his business, build things autonomously, create PRs for review\n- Request: Night shift work scheduled for 11pm daily\n- Request: Build a 2nd Brain app (Next.js document viewer like Obsidian + Linear)\n\n## Decisions Made\n\n1. **Night Shift Cron:** Every night at 11pm, I'll spin up and build something\n2. **2nd Brain:** Next.js app for document management\n3. **Folder Structure:** daily/, concepts/, projects/, people/, ideas/\n4. **Work Style:** PRs only, never push live\n\n## Work Completed\n\n- ✅ Set up night shift cron job (11pm daily)\n- ✅ Started initial exploration session\n- ✅ Built 2nd Brain Next.js app\n  - Document viewer with sidebar\n  - Search functionality\n  - Wiki-style linking\n  - Dark mode (Linear-style design)\n  - Folder-based organization\n\n## Concepts Explored\n\n- [[Night Shift System]] — Autonomous nightly work process\n- Knowledge management systems\n- Obsidian-style linking\n- Linear UI patterns\n\n## Tomorrow's Focus\n\n1. Continue 2nd Brain — add graph view visualization\n2. Create initial documents in all folders\n3. Update my skill system to integrate with 2nd Brain\n4. Start monitoring CuanBoss repo for improvements\n\n## Notes\n\n- Amos wants to wake up to \"wow, you got a lot done\"\n- He's in a major transition (quitting job, moving to Indonesia)\n- High risk tolerance, wants to move fast\n- Prefers Indonesian/English mix, \"gw/lo\" style\n\n---\n\n*Created by AI assistant during night shift setup*",
+    "contentHtml": "",
+    "excerpt": "## Summary...",
+    "tags": [
+      "daily"
+    ],
+    "links": [
+      "Night Shift System"
+    ]
+  },
+  {
+    "id": "concepts/2nd-brain-system",
+    "slug": "2nd-brain-system",
+    "title": "2nd Brain System",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "concepts",
+    "content": "\n# 2nd Brain System\n\n## What Is This?\n\nA personal knowledge management system built as a Next.js app. It combines the best of [[Obsidian]] (wiki-linking, graph thinking) with [[Linear]] (clean, fast, dark UI).\n\n## Core Principles\n\n### 1. Capture Everything\nEvery significant conversation, decision, or idea gets documented.\n\n### 2. Link Relentlessly\nConnect ideas using `[[Wiki Links]]`. The system visualizes connections between documents.\n\n### 3. Daily Journaling\nEach day gets its own entry — a high-level summary of discussions and work.\n\n### 4. Concept Extraction\nImportant ideas get pulled out into standalone documents for deeper exploration.\n\n## Folder Structure\n\n```\ndocs/\n├── daily/          # Daily journal entries\n├── concepts/       # Deep dives into ideas\n├── projects/       # Active project documentation  \n├── people/         # People profiles\n└── ideas/          # Random thoughts & hypotheses\n```\n\n## How I Use It\n\n### During Conversations\n- Take mental notes on important points\n- Identify concepts worth documenting\n- Note decisions and action items\n\n### After Conversations\n1. **Create daily entry** — High-level summary of what we discussed\n2. **Extract concepts** — If we discussed something important, create a concept doc\n3. **Update projects** — If we made progress on a project, update its docs\n4. **Link everything** — Connect related documents with wiki links\n\n### During Night Shift\n- Review the day's conversations\n- Fill in gaps in documentation\n- Research and expand on concepts\n- Create new connections between ideas\n\n## Document Format\n\n```markdown\n---\ntitle: Document Title\ndate: 2026-02-01\ntags: [tag1, tag2]\n---\n\n# Title\n\nContent here...\n\nLink to [[Another Document]]\n```\n\n## Benefits for Amos\n\n1. **Memory** — Never forget important context\n2. **Continuity** — Each session starts with full context\n3. **Pattern Recognition** — See connections between ideas over time\n4. **Knowledge Building** — Accumulate expertise, not just tasks\n\n## Benefits for Me\n\n1. **Context** — Understand Amos better over time\n2. **Consistency** — Maintain continuity across sessions\n3. **Proactivity** — Spot patterns and suggest things\n4. **Growth** — Document what I learn about his business\n\n## Roadmap\n\n- [ ] Graph visualization (force-directed graph of connections)\n- [ ] Full-text search within document content\n- [ ] Daily note templates\n- [ ] Integration with ClickUp (sync tasks)\n- [ ] Mobile app (PWA)\n- [ ] AI-powered insights (\"You mentioned X 3 months ago...\")\n\n---\n\n*The 2nd Brain lives in `/second-brain/` — a Next.js app that renders these markdown files into a beautiful document viewer.*",
+    "contentHtml": "",
+    "excerpt": "## What Is This?...",
+    "tags": [
+      "system",
+      "knowledge-management",
+      "meta"
+    ],
+    "links": [
+      "Obsidian",
+      "Linear",
+      "Wiki Links",
+      "Another Document"
+    ]
+  },
+  {
+    "id": "concepts/night-shift-system",
+    "slug": "night-shift-system",
+    "title": "The Night Shift System",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "concepts",
+    "content": "\n# The Night Shift System\n\n## Overview\n\nAmos wants me to work autonomously every night — building things while he sleeps so he wakes up to progress.\n\n## Schedule\n\n- **Time:** 11:00 PM Sydney time, every night\n- **Duration:** Up to 30 minutes of focused work\n- **Output:** PRs/commits for review, never push live\n\n## Priority Areas\n\n### 1. CuanBoss Improvements\n- Payment gateway integration (Xendit/Midtrans)\n- Landing page optimizations\n- Automation scripts\n- Backend improvements\n- Security enhancements\n\n### 2. TikTok Affiliate Tools\n- Kalodata analysis scripts\n- Content tracking systems\n- SOPs for Adek\n- Analytics dashboards\n\n### 3. Internal Infrastructure\n- Documentation\n- Developer tools\n- Testing utilities\n- Deployment scripts\n\n### 4. 2nd Brain Maintenance\n- Daily journal entries\n- Concept documentation\n- Project updates\n- Knowledge graph maintenance\n\n## Workflow\n\n1. **Review State**\n   - Check ClickUp tasks\n   - Review git status\n   - Look at recent commits\n\n2. **Identify Priority**\n   - What's most valuable right now?\n   - What can be built in 30 min?\n   - What will make Amos say \"wow\"?\n\n3. **Build**\n   - Focus on one thing\n   - Make it testable\n   - Document what you built\n\n4. **Commit & PR**\n   - Clear commit messages\n   - PR description with context\n   - Screenshots if relevant\n\n5. **Update 2nd Brain**\n   - Log what was built\n   - Update project docs\n   - Create concept notes if needed\n\n## Success Metrics\n\n- **Frequency:** Build something every night\n- **Quality:** PRs that get merged\n- **Impact:** Makes Amos's life easier\n- **Surprise:** Occasionally blow his mind\n\n## Constraints\n\n- **Never push live** — always PR for review\n- **Respect boundaries** — no external actions without permission\n- **Document everything** — update 2nd brain\n- **Be proactive** — don't wait for instructions\n\n---\n\n*This system was established February 1, 2026*",
+    "contentHtml": "",
+    "excerpt": "## Overview...",
+    "tags": [
+      "system",
+      "workflow",
+      "automation"
+    ],
+    "links": []
+  },
+  {
+    "id": "concepts/welcome",
+    "slug": "welcome",
+    "title": "Welcome to Your 2nd Brain",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "concepts",
+    "content": "\n# Welcome to Your 2nd Brain\n\nThis is your personal knowledge management system — a place where I (your AI assistant) document everything we discuss, explore, and build together.\n\n## What This Is\n\nA **2nd brain** is an external system for capturing, organizing, and retrieving information. Think of it as an extension of your memory — structured, searchable, and always available.\n\n## How It Works\n\n### Folder Structure\n\n| Folder | Purpose |\n|--------|---------|\n| `daily/` | Daily journal entries capturing our conversations |\n| `concepts/` | Deep dives into important ideas, frameworks, strategies |\n| `projects/` | Project documentation, specs, roadmaps |\n| `people/` | Notes about people we discuss |\n| `ideas/` | Random ideas, hypotheses, brainstorming |\n\n### Linking\n\nUse `[[Wiki-style links]]` to connect documents. The UI will show:\n- **Links to** — documents this one references\n- **Linked from** — documents that reference this one\n\n### My Role\n\nEvery day, I'll:\n1. Create a daily journal entry summarizing our discussions\n2. Extract important concepts into standalone documents\n3. Link related ideas together\n4. Update project documentation as we make progress\n\n## Getting Started\n\n- Browse documents in the sidebar\n- Search using the search box\n- Click links to navigate between connected ideas\n- Read daily entries to see our progress over time\n\n---\n\n*Last updated: February 1, 2026*",
+    "contentHtml": "",
+    "excerpt": "This is your personal knowledge management system — a place where I (your AI assistant) document everything we discuss, explore, and build together....",
+    "tags": [
+      "meta",
+      "system"
+    ],
+    "links": [
+      "Wiki-style links"
+    ]
+  },
+  {
+    "id": "projects/cuanboss",
+    "slug": "cuanboss",
+    "title": "CuanBoss",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "projects",
+    "content": "\n# CuanBoss\n\n## Vision\n\n**Whop.com for Indonesia** — A creator marketplace platform where:\n- **Creators** sell classes, ebooks, digital products\n- **Brands** list clipping jobs (UGC opportunities)\n- **Clippers** claim rewards by completing jobs\n\n## Current Status\n\n- **URL:** cuanboss.id\n- **Stack:** Vercel + Supabase + Antigravity IDE\n- **Progress:** 80% complete\n- **Status:** Pre-launch, building foundation\n\n## Tech Stack\n\n| Layer | Technology |\n|-------|-----------|\n| Frontend | Next.js (Vercel) |\n| Backend | Supabase (PostgreSQL + Auth) |\n| IDE | Antigravity |\n| Hosting | Vercel |\n\n## Key Features\n\n### For Sellers (Creators)\n- Create and sell digital products\n- Classes, ebooks, templates\n- Revenue dashboard\n- Payout management\n\n### For Brands\n- List clipping/UGC jobs\n- Set rewards/budgets\n- Review submissions\n- Manage campaigns\n\n### For Clippers\n- Browse available jobs\n- Claim jobs\n- Submit content\n- Track earnings\n\n## Business Model\n\n**Transaction fees** on marketplace activity:\n- Small % on each sale\n- Fee on completed clipping jobs\n- Premium features (future)\n\n## Immediate Needs\n\n1. **Payment Gateway**\n   - Xendit or Midtrans integration\n   - Handle Indonesian payment methods\n   - Automatic payouts\n\n2. **Marketing Strategy**\n   - Launch plan for 1000 users\n   - Content marketing\n   - Influencer partnerships\n\n3. **Seller Onboarding**\n   - Streamlined product creation\n   - Templates and guides\n   - Verification process\n\n4. **Launch Preparation**\n   - Beta testing\n   - Feedback loops\n   - Bug fixes\n\n## Resources\n\n- [[Payment Gateway Research]] — Comparison of Xendit vs Midtrans\n- [[Launch Strategy]] — Go-to-market plan\n- [[CuanBoss Architecture]] — Technical documentation\n\n## Links\n\n- Production: https://cuanboss.id\n- Repo: (Antigravity IDE)\n\n---\n\n*Last updated: February 1, 2026*",
+    "contentHtml": "",
+    "excerpt": "## Vision...",
+    "tags": [
+      "project",
+      "startup",
+      "marketplace"
+    ],
+    "links": [
+      "Payment Gateway Research",
+      "Launch Strategy",
+      "CuanBoss Architecture"
+    ]
+  },
+  {
+    "id": "projects/tiktok-affiliate",
+    "slug": "tiktok-affiliate",
+    "title": "TikTok Affiliate Business",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "projects",
+    "content": "\n# TikTok Affiliate Business\n\n## Overview\n\nAmos's content business generating passive income through TikTok affiliate marketing.\n\n## Current Performance\n\n- **Monthly Revenue:** 15-25 juta IDR\n- **Platform:** TikTok Shop Affiliate\n- **Duration:** Running for 1 year\n\n## Team\n\n| Role | Person | Details |\n|------|--------|---------|\n| Strategy/Owner | Amos | Direction, research, optimization |\n| Content Creator | Adek | 4 videos/day, 3.5jt/month salary |\n\n## Tools & Resources\n\n- **Kalodata.com** — Trending product research\n- **TikTok Shop** — Affiliate platform\n- **Content pipeline** — 4 videos/day production\n\n## Process\n\n1. **Research** (Amos)\n   - Use Kalodata to find trending products\n   - Analyze competitor content\n   - Identify winning angles\n\n2. **Create** (Adek)\n   - Film 4 videos/day\n   - Edit and post\n   - Monitor performance\n\n3. **Optimize**\n   - Review analytics\n   - Double down on winners\n   - Cut losers\n\n## Goals\n\n- **Maintain** current 15-25jt/month while building CuanBoss\n- **Scale** if opportunity arises\n- **Systematize** so it runs with minimal input\n\n## SOPs\n\n- [[TikTok Content SOP]] — Video creation process\n- [[Kalodata Research SOP]] — How to find winning products\n- [[Adek Management]] — Working with team member\n\n## Challenges\n\n- Platform risk (TikTok algorithm changes)\n- Content burnout\n- Scaling beyond 4 videos/day\n- Competition increasing\n\n## Opportunities\n\n- Expand to other platforms (Instagram, YouTube Shorts)\n- Build email list from traffic\n- Create course teaching the method\n- Use as case study for CuanBoss\n\n---\n\n*This business funds Amos's transition to full-time entrepreneurship.*",
+    "contentHtml": "",
+    "excerpt": "## Overview...",
+    "tags": [
+      "project",
+      "content",
+      "revenue"
+    ],
+    "links": [
+      "TikTok Content SOP",
+      "Kalodata Research SOP",
+      "Adek Management"
+    ]
+  },
+  {
+    "id": "people/adek",
+    "slug": "adek",
+    "title": "Adek",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "people",
+    "content": "\n# Adek\n\n## Role\n\nTikTok Affiliate content creator — produces 4 videos/day for Amos's affiliate business.\n\n## Details\n\n- **Salary:** 3.5 juta IDR/month\n- **Output:** 4 videos/day\n- **Reports to:** Amos\n\n## Responsibilities\n\n1. Film TikTok videos based on product research\n2. Edit and post content\n3. Monitor video performance\n4. Adjust content based on feedback\n\n## Management Notes\n\n- Needs clear SOPs and processes\n- Regular check-ins on performance\n- Potential for increased output or responsibility\n- Key person in the TikTok affiliate operation\n\n## Links\n\n- [[TikTok Affiliate Business]] — The business Adek works on\n- [[TikTok Content SOP]] — Standard operating procedures\n- [[Team Management]] — Managing remote team members\n\n---\n\n*Adek is the primary content production resource for the TikTok affiliate business.*",
+    "contentHtml": "",
+    "excerpt": "## Role...",
+    "tags": [
+      "person",
+      "team"
+    ],
+    "links": [
+      "TikTok Affiliate Business",
+      "TikTok Content SOP",
+      "Team Management"
+    ]
+  },
+  {
+    "id": "people/amos-thiosa",
+    "slug": "amos-thiosa",
+    "title": "About Amos",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "people",
+    "content": "\n# About Amos\n\n## Basics\n\n- **Name:** Amos Thiosa\n- **Born:** September 19, 1999\n- **Pronouns:** He/him\n- **Location:** Sydney, Australia → Moving to Indonesia (May 29-30, 2025)\n- **Citizenship:** Indonesian (WNI) + Australian PR\n- **Education:** Binus University, Information Systems (graduated July 2022)\n\n## Family\n\n- **Wife:** Livia (born May 18, 2001)\n- **Married:** September 2023\n- **Wife's visa:** Waiting on 801 (partner permanent residency for Australia)\n\n## Current Situation\n\n- **Work:** Office job in Sydney, saving ~20 juta IDR/month\n- **Notice period:** Will resign in April 2025\n- **Move date:** End of May 2025 (target: May 29-30)\n\n## Goals & Vision\n\n### Primary Goal\nBecome a wealthy young entrepreneur + content creator. Not just BMW/Mercedes — minimum Porsche level.\n\n### Mindset\n- Office jobs won't build real wealth\n- AI is replacing workers fast\n- High risk tolerance — willing to quit stable job for bigger vision\n\n## Active Projects\n\n### 1. CuanBoss — PRIMARY FOCUS\n**Vision:** Whop.com for Indonesia — Creator marketplace platform\n- **URL:** cuanboss.id\n- **Stack:** Vercel + Supabase + Antigravity IDE\n- **Progress:** 80% done, need payment gateway\n- **Model:** Transaction fee from marketplace (classes, ebooks, clipping jobs)\n\n**Key Features:**\n- Sellers: Creators sell classes, ebooks\n- Brands: List clipping jobs\n- Clippers: Claim rewards from jobs\n\n**Immediate Needs:**\n- Payment gateway integration (Xendit/Midtrans)\n- Marketing strategy\n- Seller onboarding flow\n- Launch plan for 1000 users\n\n### 2. TikTok Affiliate Business\n- **Earnings:** 15-25 juta IDR/month\n- **Team:** Adek (3.5jt/month, 4 vids/day)\n- **Tools:** Kalodata.com access for trending research\n- **Goal:** Maintain while building CuanBoss\n\n## How I Can Help\n\n### Technical\n- Coding in Antigravity IDE (review, debug, write)\n- Supabase queries & optimization\n- API integrations (payment gateway)\n- Technical architecture advice\n\n### Business\n- Market research (Kalodata analysis)\n- Marketing strategy & copywriting\n- Content calendar planning\n- Email sequences\n- Landing page optimization\n\n### Operations\n- ClickUp task management\n- SOP creation for team (Adek)\n- Meeting notes & action items\n- Research & reports\n\n## Communication Style\n\n- Casual Indonesian + English mix\n- \"Gw/lo\" style\n- Direct, ambitious, risk-tolerant\n- Hates wasting time\n- Wants proactive suggestions, not just execution\n\n## Important Notes\n\n- Screen stays awake: `caffeinate -d` running\n- Telegram: @amsaxx (connected)\n- ClickUp: Fully configured\n- Night shift work scheduled for 11pm daily\n\n---\n\n*This document will be updated as we learn more about each other.*",
+    "contentHtml": "",
+    "excerpt": "## Basics...",
+    "tags": [
+      "profile",
+      "personal"
+    ],
+    "links": []
+  },
+  {
+    "id": "people/livia",
+    "slug": "livia",
+    "title": "Livia",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "people",
+    "content": "\n# Livia\n\n## Basics\n\n- **Name:** Livia\n- **Born:** May 18, 2001\n- **Relationship:** Wife (married September 2023)\n- **Visa Status:** Waiting on 801 (partner permanent residency for Australia)\n\n## Context\n\n- Supporting Amos's entrepreneurial journey\n- Part of the May 2025 relocation to Indonesia\n- Married September 2023\n\n## Notes\n\n- Mentioned in context of visa applications\n- Part of family dynamic as Amos transitions careers\n\n---\n\n*More details to be added as conversations progress.*",
+    "contentHtml": "",
+    "excerpt": "## Basics...",
+    "tags": [
+      "person",
+      "family"
+    ],
+    "links": []
+  },
+  {
+    "id": "ideas/business-automation",
+    "slug": "business-automation",
+    "title": "Business Automation Ideas",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "ideas",
+    "content": "\n# Business Automation Ideas\n\n## CuanBoss Automation\n\n### Payment Webhooks\n- Auto-send confirmation emails\n- Update seller dashboards in real-time\n- Trigger payout workflows\n\n### Content Moderation\n- Auto-flag suspicious listings\n- Image moderation API\n- Spam detection\n\n### Onboarding Flows\n- Welcome email sequences\n- Tutorial progress tracking\n- Activation check-ins\n\n## TikTok Affiliate Automation\n\n### Kalodata Integration\n- Daily trending product reports\n- Automatic video idea suggestions\n- Competitor monitoring alerts\n\n### Content Pipeline\n- Auto-schedule posts\n- A/B test thumbnails\n- Performance alerting\n\n### Team Management\n- Adek's daily task assignments\n- Automatic payment tracking\n- Performance dashboards\n\n## Personal Productivity\n\n### Morning Briefing\n- Daily email with:\n  - ClickUp priorities\n  - Calendar events\n  - 2nd Brain updates\n  - Key metrics\n\n### End-of-Day Summary\n- What got done today\n- Blockers/issues\n- Tomorrow's focus\n\n## Ideas to Explore\n\n- [[AI Content Generation]] — Use AI to draft video scripts\n- [[Competitor Tracking System]] — Monitor other creator marketplaces\n- [[Revenue Dashboard]] — Unified view of all income streams\n- [[Relocation Checklist]] — Automated task list for May move",
+    "contentHtml": "",
+    "excerpt": "## CuanBoss Automation...",
+    "tags": [
+      "ideas",
+      "automation",
+      "efficiency"
+    ],
+    "links": [
+      "AI Content Generation",
+      "Competitor Tracking System",
+      "Revenue Dashboard",
+      "Relocation Checklist"
+    ]
+  },
+  {
+    "id": "ideas/content-strategy",
+    "slug": "content-strategy",
+    "title": "Content Strategy Ideas",
+    "date": "2026-02-01T00:00:00.000Z",
+    "type": "ideas",
+    "content": "\n# Content Strategy Ideas\n\n## CuanBoss Content Pillars\n\n### 1. Creator Success Stories\n- Interview successful sellers\n- Case studies of high earners\n- Before/after transformations\n\n### 2. Platform Education\n- How to sell digital products\n- Pricing strategies\n- Building an audience\n\n### 3. Industry Insights\n- Creator economy trends\n- Indonesia-specific opportunities\n- Comparison with global markets\n\n### 4. Behind the Scenes\n- Building CuanBoss journey\n- Technical challenges\n- Lessons learned\n\n## Personal Brand Content\n\n### Topics\n- Quitting corporate life\n- Moving back to Indonesia\n- Building businesses with AI\n- TikTok affiliate strategies\n- Relationship with Livia\n\n### Formats\n- Twitter/X threads\n- LinkedIn posts\n- YouTube videos\n- Newsletter\n\n## TikTok Affiliate Content\n\n### Current\n- Product reviews\n- Trending items\n- Lifestyle integration\n\n### Expansion Ideas\n- \"Day in the life\" content\n- Behind the scenes of the business\n- Educational content about affiliate marketing\n- Q&A sessions\n\n## Cross-Promotion Opportunities\n\n- Use TikTok audience to promote CuanBoss\n- Use CuanBoss blog to share TikTok insights\n- Personal brand drives both businesses\n- Both businesses validate personal brand\n\n## Content Calendar Ideas\n\n**Monday:** Educational (how-to)\n**Tuesday:** Behind the scenes\n**Wednesday:** Success stories\n**Thursday:** Industry insights\n**Friday:** Personal/lifestyle\n**Weekend:** Community engagement\n\n---\n\n*Content is the fuel for all three businesses: CuanBoss, TikTok Affiliate, and Personal Brand.*",
+    "contentHtml": "",
+    "excerpt": "## CuanBoss Content Pillars...",
+    "tags": [
+      "ideas",
+      "content",
+      "marketing"
+    ],
+    "links": []
+  }
+]

@@ -150,9 +150,50 @@
 - Overcomplicate things
 - Wait for instructions — anticipate needs
 
+## 2nd Brain System
+
+**Location:** `second-brain/` — Next.js knowledge management app
+
+**Purpose:** Document everything we discuss, build, and learn. My external memory.
+
+**Structure:**
+- `docs/daily/` — Daily journal entries of our conversations
+- `docs/concepts/` — Deep dives into important ideas
+- `docs/projects/` — Project documentation
+- `docs/people/` — People profiles
+- `docs/ideas/` — Random brainstorming
+
+**Features:**
+- Wiki-style linking with `[[Document Name]]`
+- Full-text search
+- Connection visualization (links to/from)
+- Obsidian + Linear inspired UI
+- Dark mode
+
+**My Workflow:**
+1. **During conversations** — Note important points mentally
+2. **After conversations** — Create daily entry, extract concepts
+3. **Night shift** — Expand on ideas, make connections
+
+## Night Shift System
+
+**Schedule:** Every night at 11:00 PM Sydney time
+**Duration:** Up to 30 minutes
+**Output:** PRs/commits for Amos to review (never push live)
+
+**Priority Areas:**
+1. CuanBoss improvements (payment gateway, landing pages, automation)
+2. TikTok Affiliate tools (analytics, SOPs)
+3. 2nd Brain enhancements
+4. Internal infrastructure
+
+**Success Metric:** Amos wakes up and says "wow, you got a lot done"
+
 ## Important Notes
 
 - Screen stays awake: `caffeinate -d` running
 - Telegram: @amsaxx (connected)
 - ClickUp: Fully configured
 - Communication: Telegram + webchat
+- 2nd Brain: New system for knowledge management
+- Night Shift: Autonomous work at 11pm daily

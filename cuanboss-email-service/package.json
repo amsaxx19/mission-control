@@ -1,0 +1,24 @@
+{
+  "name": "cuanboss-email-service",
+  "version": "1.0.0",
+  "description": "Email notification system for CuanBoss marketplace",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "email dev",
+    "build": "tsc",
+    "export": "email export",
+    "test:email": "tsx examples/test-emails.ts"
+  },
+  "dependencies": {
+    "resend": "^3.0.0",
+    "react-email": "^2.0.0",
+    "@react-email/components": "^0.0.14",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0"
+  }
+}
