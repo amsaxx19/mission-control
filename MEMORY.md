@@ -30,7 +30,21 @@
 ### ClickUp Integration
 - **API Key:** Stored in `.clickup.env` (chmod 600, never commit)
 - **Skill Location:** `skills/clickup/SKILL.md`
-- **Default List:** Project 1 (ID: 901613291887)
+
+**Folder Structure:**
+- **CuanBoss** (90168324520) — Platform development
+  - 🚀 Development: 901613292359
+  - 📢 Marketing & Launch: 901613292361
+  - 💼 Operations: 901613292362
+- **TikTok Affiliate** (90168324521) — Content business
+  - 🎥 Content Production: 901613292363
+  - 📊 Analytics & Research: 901613292364
+  - 👥 Team Management: 901613292365
+- **Personal Branding** (90168324522) — Personal brand
+  - ✍️ Content Creation: 901613292366
+  - 📈 Growth Strategy: 901613292367
+  - 🤝 Collaborations: 901613292368
+- **Legacy:** Project 1 (901613291887), Project 2 (901613291886)
 
 **Workflow (ALWAYS FOLLOW):**
 1. User asks me to do something → Create ClickUp task first

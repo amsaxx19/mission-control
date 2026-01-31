@@ -78,22 +78,48 @@ Optional: description, priority (1=urgent, 2=high, 3=normal, 4=low), due_date (U
 Based on current setup:
 - **Team**: Amos's Workspace (90161463344)
 - **Space**: Team Space (90166199166)
-- **Lists**:
-  - Project 1: 901613291887 ← Default for general tasks
-  - Project 2: 901613291886
-  - Get Started: 901613291889
 
-When user says "log this to ClickUp" or "track this task", use the create → work → complete workflow automatically.
+### 📁 Folder Structure
+
+**CuanBoss** (90168324520) — Primary focus, platform development
+- 🚀 Development: 901613292359 ← Core product work
+- 📢 Marketing & Launch: 901613292361 ← Growth & acquisition
+- 💼 Operations: 901613292362 — Legal, finance, admin
+
+**TikTok Affiliate** (90168324521) — Current income source
+- 🎥 Content Production: 901613292363 ← Daily content tasks
+- 📊 Analytics & Research: 901613292364 ← Kalodata, trending
+- 👥 Team Management: 901613292365 ← Adek, SOPs
+
+**Personal Branding** (90168324522) — Long-term asset building
+- ✍️ Content Creation: 901613292366 ← Posts, videos, value
+- 📈 Growth Strategy: 901613292367 — Platform growth
+- 🤝 Collaborations: 901613292368 — Partnerships, deals
+
+**Legacy Lists** (General tasks)
+- Project 1: 901613291887
+- Project 2: 901613291886
+
+## Workflow
+
+When user says "Do X":
+1. Ask or determine: Which project? (CuanBoss/TikTok/Personal Brand)
+2. Create task in appropriate list
+3. Do the work
+4. Mark complete
 
 ## Quick Commands
 
 ```bash
-# Create task in Project 1 (default)
-./skills/clickup/scripts/create_task.sh "Task Name" "901613291887" "Description"
+# CuanBoss Development (default for tech work)
+./skills/clickup/scripts/create_task.sh "Task Name" "901613292359" "Description"
 
-# Create task in Project 2
-./skills/clickup/scripts/create_task.sh "Task Name" "901613291886" "Description"
+# TikTok Content
+./skills/clickup/scripts/create_task.sh "Task Name" "901613292363" "Description"
 
-# Mark task complete
+# Personal Brand Content
+./skills/clickup/scripts/create_task.sh "Task Name" "901613292366" "Description"
+
+# Mark complete
 ./skills/clickup/scripts/complete_task.sh "TASK_ID"
 ```
