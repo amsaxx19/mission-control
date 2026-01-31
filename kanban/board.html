@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Kanban Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>📋 Project Kanban</h1>
+        <div class="controls">
+            <input type="text" id="newTaskInput" placeholder="Add new task...">
+            <select id="prioritySelect">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+            </select>
+            <button onclick="addTask()">+ Add Task</button>
+            <button onclick="exportData()">📤 Export</button>
+            <button onclick="document.getElementById('importFile').click()">📥 Import</button>
+            <input type="file" id="importFile" accept=".json" onchange="importData(this)" style="display:none">
+        </div>
+    </div>
+
+    <div class="board">
+        <div class="column" data-status="backlog">
+            <div class="column-header">
+                <h2>📝 Backlog</h2>
+                <span class="count">0</span>
+            </div>
+            <div class="task-list" id="backlog" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+
+        <div class="column" data-status="in-progress">
+            <div class="column-header">
+                <h2>🔄 In Progress</h2>
+                <span class="count">0</span>
+            </div>
+            <div class="task-list" id="in-progress" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+
+        <div class="column" data-status="review">
+            <div class="column-header">
+                <h2>👀 Review</h2>
+                <span class="count">0</span>
+            </div>
+            <div class="task-list" id="review" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+
+        <div class="column" data-status="done">
+            <div class="column-header">
+                <h2>✅ Done</h2>
+                <span class="count">0</span>
+            </div>
+            <div class="task-list" id="done" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
