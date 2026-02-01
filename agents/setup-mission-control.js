@@ -1,15 +1,26 @@
 const { createClient } = require('@supabase/supabase-js');
+require('dotenv').config({ path: '.env.mission-control' });
 
-const supabaseUrl = 'https://ohgnjyeqdqahhxewhgwi.supabase.co';
-const supabaseServiceKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oZ25qeWVxZHFhaGh4ZXdoZ3dpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MzY2ODk4NiwiZXhwIjoyMDc5MjQ0OTg2fQ.zUotMmOwENVNk4Wyu_PE2UsQ7e4vbsVuBKuaL8c7x5I';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.error('❌ Missing environment variables!');
+  console.error('Please create .env.mission-control with:');
+  console.error('  NEXT_PUBLIC_SUPABASE_URL=...');
+  console.error('  SUPABASE_SERVICE_ROLE_KEY=...');
+  console.error('\nSee SETUP_NEW_PROJECT.md for instructions');
+  process.exit(1);
+}
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 async function setupMissionControl() {
   console.log('🚀 Setting up Mission Control...\n');
+  console.log('Project:', supabaseUrl);
   
   // 1. Insert initial agents
-  console.log('1️⃣ Creating agents...');
+  console.log('\n1️⃣ Creating agents...');
   const agents = [
     { name: 'Jarvis', role: 'Squad Lead', status: 'active', session_key: 'agent:main:main' },
     { name: 'Shuri', role: 'Product Analyst', status: 'idle', session_key: 'agent:product-analyst:main' },
@@ -23,8 +34,9 @@ async function setupMissionControl() {
     .upsert(agents, { onConflict: 'session_key' });
   
   if (agentsError) {
-    console.log('⚠️  Agents table might not exist yet. Run SQL first.');
-    console.log('Error:', agentsError.message);
+    console.log('⚠️  Error:', agentsError.message);
+    console.log('\nMake sure you ran the SQL schema first!');
+    console.log('See SETUP_NEW_PROJECT.md');
     return;
   }
   console.log('✅ Agents created');
@@ -52,14 +64,12 @@ async function setupMissionControl() {
     }
   ];
   
-  const { data: taskData, error: tasksError } = await supabase
+  const { error: tasksError } = await supabase
     .from('tasks')
-    .upsert(tasks, { onConflict: 'title' })
-    .select();
+    .upsert(tasks, { onConflict: 'title' });
   
   if (tasksError) {
-    console.log('⚠️  Tasks table might not exist yet. Run SQL first.');
-    console.log('Error:', tasksError.message);
+    console.log('⚠️  Error:', tasksError.message);
     return;
   }
   console.log('✅ Tasks created');
@@ -77,13 +87,13 @@ async function setupMissionControl() {
     .insert(activities);
   
   if (activitiesError) {
-    console.log('⚠️  Activities table might not exist yet.');
+    console.log('⚠️  Error:', activitiesError.message);
   } else {
     console.log('✅ Activities added');
   }
   
   console.log('\n🎉 Mission Control setup complete!');
-  console.log('\n📊 Dashboard: https://app.supabase.com/project/ohgnjyeqdqahhxewhgwi');
+  console.log('\n📊 Dashboard:', supabaseUrl.replace('.co', '.co/project'));
 }
 
 setupMissionControl().catch(console.error);
