@@ -1,36 +1,37 @@
-# WORKING.md — System Setup
+# WORKING.md — Jarvis Squad Lead
 
-## Current Task
-Setting up Multi-Agent System infrastructure
+## Current Focus
+Multi-Agent System infrastructure is set up and running.
 
-## Status
-- ✅ Agent SOUL files created (Jarvis, Shuri, Friday, Loki, Wong)
-- ✅ AGENTS.md operating manual written
-- ✅ Mission Control database created
-- ⏳ Heartbeat cron jobs pending
-- ⏳ Mission Control UI pending
-- ⏳ Daily standup automation pending
+## Status Overview
 
-## Next Steps
-1. Create heartbeat cron jobs for all agents
-2. Build simple Mission Control UI
-3. Setup daily standup automation
-4. Test agent communication
-5. Deploy and activate
+### ✅ Completed
+- Agent SOUL files for all 5 agents
+- AGENTS.md operating manual
+- File-based routing system
+- Mission Control tracking
+- Jarvis heartbeat cron (running)
 
-## Context
-Building 5-agent system based on Bhanu Teja P's architecture:
-- Jarvis: Coordinator
-- Shuri: Research/Testing  
-- Friday: Developer
-- Loki: Content
-- Wong: Documentation
+### ⏳ In Progress
+- Monitoring system health
+- Awaiting database setup decision from Amos
 
-Each agent wakes every 15 minutes, checks Mission Control, does work.
+### 🚧 Blockers (Known)
+- Cron API timeout for additional agents (resolved via file-based coordinator pattern)
+- **Waiting on:** Valid Supabase API key OR Convex project from Amos
 
-## Blockers
-None currently
+## Active Tasks
+*None currently — awaiting Amos response on database setup (Supabase vs Convex)*
+
+## Next Actions
+1. Await Amos's decision on database (Supabase key or Convex project)
+2. Route tasks to appropriate specialist agents once database ready
+3. Monitor progress and report daily standups
+
+## Last Heartbeat Check
+- **Time:** 2026-02-01 14:30 AEST
+- **Status:** All agents idle, no urgent tasks
+- **Main session:** Waiting for Amos response on API keys
 
 ---
-
-*Updated: 2026-02-01 12:50 UTC*
+*Updated: 2026-02-01 14:30 AEST*

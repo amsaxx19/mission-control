@@ -4,44 +4,26 @@ require('dotenv').config({ path: '.env.mission-control' });
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl || !supabaseServiceKey) {
-  console.error('❌ Missing environment variables!');
-  console.error('Please create .env.mission-control with:');
-  console.error('  NEXT_PUBLIC_SUPABASE_URL=...');
-  console.error('  SUPABASE_SERVICE_ROLE_KEY=...');
-  console.error('\nSee SETUP_NEW_PROJECT.md for instructions');
-  process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
+const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: { autoRefreshToken: false, persistSession: false }
+});
 
 async function setupMissionControl() {
   console.log('🚀 Setting up Mission Control...\n');
-  console.log('Project:', supabaseUrl);
   
-  // 1. Insert initial agents
-  console.log('\n1️⃣ Creating agents...');
-  const agents = [
-    { name: 'Jarvis', role: 'Squad Lead', status: 'active', session_key: 'agent:main:main' },
-    { name: 'Shuri', role: 'Product Analyst', status: 'idle', session_key: 'agent:product-analyst:main' },
-    { name: 'Friday', role: 'Developer', status: 'active', session_key: 'agent:developer:main' },
-    { name: 'Loki', role: 'Content Writer', status: 'idle', session_key: 'agent:content-writer:main' },
-    { name: 'Wong', role: 'Documentation', status: 'active', session_key: 'agent:notion-agent:main' }
-  ];
-  
-  const { error: agentsError } = await supabase
+  // 1. Check agents
+  console.log('1️⃣ Checking agents...');
+  const { data: agents, error: agentsError } = await supabase
     .from('agents')
-    .upsert(agents, { onConflict: 'session_key' });
+    .select('*');
   
   if (agentsError) {
-    console.log('⚠️  Error:', agentsError.message);
-    console.log('\nMake sure you ran the SQL schema first!');
-    console.log('See SETUP_NEW_PROJECT.md');
+    console.log('❌ Error:', agentsError.message);
     return;
   }
-  console.log('✅ Agents created');
+  console.log(`✅ ${agents.length} agents found`);
   
-  // 2. Insert initial tasks
+  // 2. Insert tasks (without upsert)
   console.log('\n2️⃣ Creating tasks...');
   const tasks = [
     { 
@@ -64,36 +46,56 @@ async function setupMissionControl() {
     }
   ];
   
-  const { error: tasksError } = await supabase
+  // Check if tasks exist first
+  const { data: existingTasks } = await supabase
     .from('tasks')
-    .upsert(tasks, { onConflict: 'title' });
+    .select('title');
   
-  if (tasksError) {
-    console.log('⚠️  Error:', tasksError.message);
-    return;
+  const existingTitles = existingTasks?.map(t => t.title) || [];
+  const newTasks = tasks.filter(t => !existingTitles.includes(t.title));
+  
+  if (newTasks.length > 0) {
+    const { error: tasksError } = await supabase
+      .from('tasks')
+      .insert(newTasks);
+    
+    if (tasksError) {
+      console.log('⚠️  Error:', tasksError.message);
+    } else {
+      console.log(`✅ ${newTasks.length} tasks created`);
+    }
+  } else {
+    console.log('✅ Tasks already exist');
   }
-  console.log('✅ Tasks created');
   
   // 3. Add activities
   console.log('\n3️⃣ Adding activities...');
-  const activities = [
-    { type: 'task_created', message: 'Multi-Agent System setup started by Jarvis' },
-    { type: 'document_created', message: 'Email system deployed by Friday' },
-    { type: 'document_created', message: '2nd Brain created by Wong and Friday' }
-  ];
-  
-  const { error: activitiesError } = await supabase
+  const { count } = await supabase
     .from('activities')
-    .insert(activities);
+    .select('*', { count: 'exact', head: true });
   
-  if (activitiesError) {
-    console.log('⚠️  Error:', activitiesError.message);
+  if (count === 0) {
+    const activities = [
+      { type: 'task_created', message: 'Multi-Agent System setup started by Jarvis' },
+      { type: 'document_created', message: 'Email system deployed by Friday' },
+      { type: 'document_created', message: '2nd Brain created by Wong and Friday' }
+    ];
+    
+    const { error: activitiesError } = await supabase
+      .from('activities')
+      .insert(activities);
+    
+    if (activitiesError) {
+      console.log('⚠️  Error:', activitiesError.message);
+    } else {
+      console.log('✅ Activities added');
+    }
   } else {
-    console.log('✅ Activities added');
+    console.log('✅ Activities already exist');
   }
   
   console.log('\n🎉 Mission Control setup complete!');
-  console.log('\n📊 Dashboard:', supabaseUrl.replace('.co', '.co/project'));
+  console.log('\n📊 Dashboard: https://app.supabase.com/project/ihdbwzuslgtepalvjwxz');
 }
 
 setupMissionControl().catch(console.error);

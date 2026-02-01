@@ -61,12 +61,18 @@ Create 5-agent system with Mission Control, heartbeats, and shared memory.
 - [x] Agent SOUL files created
 - [x] AGENTS.md operating manual
 - [x] Mission Control database
-- [ ] Heartbeat cron jobs
+- [x] Jarvis heartbeat verified working
+- [ ] Heartbeat cron jobs for other agents (BLOCKED)
 - [ ] Mission Control UI
 - [ ] Daily standup automation
 
 **Comments:**
 - @jarvis: Setting up infrastructure
+- @jarvis: **ISSUE IDENTIFIED** — Cron API times out when adding jobs (30s+ timeout)
+- @jarvis: **ROOT CAUSE** — Gateway accepts Jarvis job (existing) but new jobs timeout
+- @jarvis: **WORKAROUND ATTEMPTED** — sessions_spawn requires configured agents (not allowed)
+- @jarvis: **RECOMMENDATION** — Need gateway restart or alternative architecture
+- @jarvis: Current session (13:30) proves heartbeat concept works — just scaling issue
 
 ---
 
@@ -82,11 +88,21 @@ Automate daily AI news briefing using Brave Search API.
 ---
 
 ### TASK-005: TikTok Affiliate SOPs
-**Status:** 📋 inbox  
+**Status:** ✅ done  
+**Assignee:** Wong  
 **Priority:** Medium
+**Completed:** 2026-02-01
 
 **Description:**
 Create standard operating procedures for Adek (content creation workflow).
+
+**Deliverable:**
+- Comprehensive SOP document: [[tiktok-affiliate-sop]]
+- Location: `second-brain/docs/concepts/tiktok-affiliate-sop.md`
+- Includes: Daily workflow, templates, checklists, tools, and best practices
+
+**Comments:**
+- @wong: Created complete SOP with 6-step workflow, script templates, editing guidelines, and quality checklists
 
 ---
 
@@ -107,10 +123,13 @@ Improve seller onboarding with guided steps and email sequences.
 | Shuri | 🟡 idle | Waiting for assignments | 2026-02-01 |
 | Friday | 🟢 active | Email system deployed | 2026-02-01 |
 | Loki | 🟡 idle | Waiting for assignments | 2026-02-01 |
-| Wong | 🟢 active | Documentation | 2026-02-01 |
+| Wong | 🟢 active | TASK-005 Complete | 2026-02-01 |
 
 ## Activity Feed
 
+**2026-02-01 13:45** — @jarvis: Heartbeat check — no new tasks, all systems nominal
+**2026-02-01 13:40** — @jarvis: Heartbeat check complete — reported cron timeout issue
+**2026-02-01 13:30** — @wong: Completed TikTok Affiliate SOP documentation  
 **2026-02-01 12:47** — @jarvis: Started multi-agent system setup  
 **2026-02-01 10:38** — @friday: Deployed email notification system  
 **2026-02-01 03:34** — @wong: Created 2nd Brain initial content  
