@@ -1,0 +1,59 @@
+{
+  "name": "@cuanboss/payment-gateway",
+  "version": "1.0.0",
+  "description": "Complete payment gateway solution for CuanBoss - supports Midtrans and Xendit",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "docs"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts",
+    "test": "vitest"
+  },
+  "keywords": [
+    "payment",
+    "gateway",
+    "midtrans",
+    "xendit",
+    "indonesia",
+    "ecommerce",
+    "creator",
+    "marketplace"
+  ],
+  "author": "CuanBoss Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "typescript": "^5.0.0",
+    "tsup": "^8.0.0",
+    "vitest": "^1.0.0",
+    "react": "^18.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cuanboss/payment-gateway.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cuanboss/payment-gateway/issues"
+  },
+  "homepage": "https://cuanboss.id"
+}
