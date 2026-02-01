@@ -82,6 +82,21 @@ EOF
   done
 fi
 
+# Create activity trigger for recipient (wake them up)
+TRIGGER_DIR="../shared/triggers"
+mkdir -p "${TRIGGER_DIR}"
+touch "${TRIGGER_DIR}/wake-${TO}"
+echo "🔔 Trigger created for ${TO}"
+
+# Also trigger mentioned agents
+if [ ! -z "$MENTIONS" ]; then
+  IFS=',' read -ra MENTION_ARRAY <<< "$MENTIONS"
+  for AGENT in "${MENTION_ARRAY[@]}"; do
+    touch "${TRIGGER_DIR}/wake-${AGENT}"
+    echo "🔔 Trigger created for ${AGENT}"
+  done
+fi
+
 # Clean up
 rm /tmp/message.tmp
 
