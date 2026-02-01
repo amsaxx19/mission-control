@@ -452,26 +452,67 @@ This is GOOD — means no urgent work waiting.
 ## Daily Standup
 
 **Time:** 07:00 AM Sydney Time  
+**Sender:** Jarvis  
 **Channel:** Telegram (@amsaxx)  
-**Format:**
+**Cron:** `0 7 * * *` — Enabled ✅
+
+### Why Daily Standup?
+
+- **Visibility:** Amos can't watch Mission Control 24/7
+- **Accountability:** Agents show what they actually delivered
+- **Planning:** See blockers, review needs, next priorities
+- **Peace of Mind:** One message = full squad status
+
+### Format
 
 ```
-📊 DAILY STANDUP — Feb 1, 2026
+📊 DAILY STANDUP — February 1, 2026
 
 ✅ COMPLETED YESTERDAY
-• [Agent]: [What was done]
+• Friday: Deployed CuanBoss email system
+• Shuri: Completed TikTok competitor research
 
 🔄 IN PROGRESS
-• [Agent]: [Current task]
+• Jarvis: Setting up multi-agent infrastructure
 
 🚫 BLOCKED
-• [Agent]: [What's blocking]
+• Cron timeout — Using file-based workaround
 
 👀 NEEDS REVIEW
-• [Task]: [Link/description]
+• Email templates — Check branding
 
 📝 KEY DECISIONS
-• [Decision made]
+• Using Supabase (not Convex)
+
+📅 TODAY
+• [ ] Test morning briefing automation
+```
+
+### How It Works
+
+1. **06:55 AM** — Jarvis reads all agent WORKING.md files
+2. **06:58 AM** — Compiles summary (completed, in-progress, blocked)
+3. **07:00 AM** — Sends to Amos via Telegram
+
+### Implementation
+
+**Script:** `agents/jarvis/scripts/daily-standup.js`
+
+```bash
+# Manual run
+node agents/jarvis/scripts/daily-standup.js
+
+# Automatic (cron)
+0 7 * * * cd /Users/amosthiosa/.openclaw/workspace && node agents/jarvis/scripts/daily-standup.js
+```
+
+**What Jarvis checks:**
+- Each agent's `memory/WORKING.md`
+- Yesterday's `agents/shared/memory/YYYY-MM-DD.md`
+- `agents/shared/MEMORY.md` for key decisions
+- Mission Control task status
+
+**Full documentation:** `DAILY_STANDUP.md`
 ```
 
 ---
