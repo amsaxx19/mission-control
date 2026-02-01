@@ -189,6 +189,50 @@
 
 **Success Metric:** Amos wakes up and says "wow, you got a lot done"
 
+### Night Shift Log
+
+**Feb 1, 2026 - Night Shift #1**
+- **Branch:** `feature/payment-gateway-module`
+- **Commit:** `37ec702`
+- **Deliverable:** Complete payment gateway module
+
+**Built:**
+1. **Midtrans Integration** (`src/midtrans/client.ts`)
+   - Snap API for payments
+   - Core API for status/refunds
+   - CuanBoss order format with 15% fee
+   - Webhook signature verification
+
+2. **Xendit Integration** (`src/xendit/client.ts`)
+   - Invoice API (payment links)
+   - Disbursement API (seller payouts)
+   - QRIS, Retail, E-wallet support
+   - Webhook handling
+
+3. **Seller Onboarding** (`src/seller-onboarding/service.ts`)
+   - 5-step KYC flow
+   - Profile, verification, bank setup
+   - Progress tracking
+   - Can-sell activation
+
+4. **React Components**
+   - `PaymentMethodsSelector` - UI for payment methods
+   - `CheckoutButton` - Complete checkout flow
+   - `PayoutDashboard` - Seller balance management
+   - `TikTokAffiliateDashboard` - Analytics for TikTok business
+
+5. **Database Schema** (in `docs/INTEGRATION.md`)
+   - orders, sellers, payouts
+   - webhook_logs, transactions
+   - onboarding_steps
+
+6. **Documentation**
+   - `docs/INTEGRATION.md` - Complete setup guide
+   - `examples/api-routes.ts` - Copy-paste API routes
+   - `README.md` - Quick start
+
+**Status:** ✅ Ready for review & integration
+
 ## Important Notes
 
 - Screen stays awake: `caffeinate -d` running
