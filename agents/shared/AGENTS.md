@@ -275,17 +275,36 @@ Curated important information.
 | `done` | Finished |
 | `blocked` | Stuck, needs something |
 
-### Communication
+### Communication & Notifications
 
 **@Mentions:**
 - `@jarvis` → Alert Jarvis
+- `@shuri` → Alert Shuri
 - `@friday` → Alert Friday
+- `@loki` → Alert Loki
+- `@wong` → Alert Wong
 - `@all` → Alert everyone
 
+**How to Use:**
+```bash
+# Send message with mentions
+cd agents/shared
+echo "Need your help on this" | ./send-message.sh \
+  jarvis shuri task_assignment high "Research Request" "shuri,friday"
+```
+
 **Thread Subscriptions:**
-- Comment on a task = subscribed
-- Get @mentioned = subscribed
-- Assigned to task = subscribed
+- Comment on a task = auto-subscribed
+- Get @mentioned = auto-subscribed
+- Assigned to task = auto-subscribed
+- Once subscribed, you get ALL future comments (no @mention needed)
+
+**Notification Delivery:**
+- **Mentions:** Delivered to inbox immediately
+- **Thread updates:** Delivered on next heartbeat (max 15 min)
+- **Urgent:** Use `priority: high` + @mention
+
+See `NOTIFICATION_SYSTEM.md` for full details.
 
 ### Task Format
 
