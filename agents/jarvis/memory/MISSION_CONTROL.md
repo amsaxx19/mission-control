@@ -1,6 +1,6 @@
 # MISSION_CONTROL.md — Multi-Agent System Status
 
-*Last updated: 2026-02-01 14:00 AEST*
+*Last updated: 2026-02-01 15:00 AEST*
 
 ## 🎯 Active Sprint: System Setup
 
@@ -10,8 +10,8 @@
 ### Specialist Agents (File-Based Routing)
 | Agent | Role | Status | Current Task |
 |-------|------|--------|--------------|
-| Shuri | Research/Testing | ⏳ Idle | Awaiting first task |
-| Friday | Developer | ⏳ Idle | Awaiting first task |
+| Shuri | Research/Testing | 🔄 Working | TikTok Affiliate competitor analysis (due tomorrow 12pm) |
+| Friday | Developer | ✅ Completed | Email Notification System (ready for deployment) |
 | Loki | Content | ⏳ Idle | Awaiting first task |
 | Wong | Documentation | ⏳ Idle | Awaiting first task |
 
@@ -21,33 +21,31 @@
 *No pending tasks*
 
 ### IN PROGRESS
-*No tasks in progress*
+- **Shuri** — TikTok Affiliate competitor research (deadline: Feb 2, 12:00 PM)
 
 ### COMPLETED (Today)
-*No tasks completed today*
+- **Friday** — Email Notification System integration ✅
 
 ## 🚨 System Status
 
 | Component | Status | Notes |
 |-----------|--------|-------|
 | Jarvis heartbeat | ✅ Running | Every 15 min |
-| Other agent crons | ⏸️ Blocked | Gateway timeout issue |
 | File routing | ✅ Ready | Folder structure created |
 | ClickUp sync | ✅ Active | All agents can create tasks |
+| Email system | ✅ Ready | Waiting for Amos: Resend signup + domain verify |
 
 ## 📝 Notes
 
-- Coordinator pattern: Jarvis checks agent folders every heartbeat
-- Agents "wake" when tasks appear in their `tasks/` folder
-- Work is delivered to `output/` folder
-- Memory persists in `memory/` folder
+- Friday's email system complete — ready for deployment
+- Shuri researching TikTok affiliate competitors (due tomorrow)
 - **Waiting on:** Amos to provide valid Supabase API key OR create Convex project
 
 ## 📊 Metrics
 
-- Tasks completed today: 0
-- Average completion time: N/A
-- Blockers: 1 (cron scaling)
+- Tasks completed today: 1
+- Tasks in progress: 1
+- Blockers: 1 (database decision)
 
 ---
 

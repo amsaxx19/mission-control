@@ -105,7 +105,117 @@ echo "Research competitor X" | ./send-message.sh jarvis shuri task_assignment hi
 
 ---
 
-## Memory System
+## Memory System (The Stack)
+
+AI sessions start fresh. No memory of yesterday. We solve this with a **memory stack** — four layers of persistence.
+
+---
+
+### Layer 1: Session Memory (Automatic)
+OpenClaw stores conversation history in JSONL files. Agents can reference their own past conversations.
+
+**Location:** `~/.openclaw/agents/main/sessions/`  
+**Managed by:** OpenClaw (automatic)  
+**Use for:** Searching past conversations, context retrieval
+
+---
+
+### Layer 2: Working Memory (/memory/WORKING.md)
+**THE MOST IMPORTANT FILE.** Current task state. Updated constantly.
+
+**Location:** `agents/<agent-name>/memory/WORKING.md`  
+**Managed by:** Each agent (you)  
+**Use for:** Resuming work after restart, tracking progress
+
+**Template:**
+```markdown
+# WORKING.md
+
+## Current Task
+[What you're working on right now]
+
+## Status
+- [x] Completed step 1
+- [ ] Working on step 2
+- [ ] Step 3 pending
+
+## Context
+[Anything needed to resume work]
+- Variable names, file paths, decisions made
+
+## Blockers
+[Anything blocking progress]
+
+## Next Steps
+1. Do X
+2. Then Y
+3. Finally Z
+```
+
+**Rule:** Update this file every time you make progress. "Mental notes" don't survive restarts.
+
+---
+
+### Layer 3: Daily Notes (/memory/YYYY-MM-DD.md)
+Raw logs of what happened each day. The "journal" of the squad.
+
+**Location:** `agents/shared/memory/2026-02-01.md`  
+**Managed by:** Jarvis (or whoever is active)  
+**Use for:** Reviewing what happened, finding when decisions were made
+
+**Format:**
+```markdown
+# 2026-02-01
+
+## 09:00 UTC
+- Started competitor research
+- Found 3 key insights
+- Blocker: API rate limit
+
+## 14:30 UTC
+- Completed analysis
+- Posted findings to Mission Control
+```
+
+---
+
+### Layer 4: Long-Term Memory (MEMORY.md)
+Curated important stuff. Lessons learned, key decisions, stable facts.
+
+**Location:** `agents/shared/MEMORY.md`  
+**Managed by:** Wong (Documentation) + Jarvis  
+**Use for:** Looking up decisions, avoiding repeated mistakes
+
+**What goes here:**
+- Architecture decisions (and why)
+- Lessons learned
+- Stable facts (API endpoints, credentials)
+- Important links
+
+**What does NOT go here:**
+- Daily logs (use Daily Notes)
+- Temporary tasks (use WORKING.md)
+- Conversations (use Session Memory)
+
+---
+
+### The Golden Rule
+
+> **If you want to remember something, WRITE IT TO A FILE.**
+> 
+> "Mental notes" don't survive session restarts. Files do.
+
+**Examples:**
+- ❌ "I'll remember to update that later" → Forgotten
+- ✅ "I'll update WORKING.md now" → Remembered
+
+**When someone says "remember this":**
+1. Ask: Which memory layer?
+2. Working task → WORKING.md
+3. Important decision → MEMORY.md
+4. Daily context → Daily Notes
+
+---
 
 ### Session Memory (Automatic)
 - Conversation history stored by OpenClaw
