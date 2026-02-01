@@ -65,6 +65,38 @@ Full access to:
 - ClickUp API
 - All other integrations
 
+## Heartbeat Protocol (Every 15 Minutes)
+
+**Schedule:** :00, :15, :30, :45 every hour
+
+### Phase 1: Load Context (Always)
+- [ ] Read `memory/WORKING.md` — What was I doing?
+- [ ] Read `../shared/memory/YYYY-MM-DD.md` — What happened today?
+- [ ] Check if context is clear
+
+### Phase 2: Check Urgent Items
+- [ ] Check `../shared/inbox/jarvis/` — New messages?
+- [ ] Check Mission Control — Tasks assigned to me?
+- [ ] Check Telegram — Direct messages from Amos?
+
+### Phase 3: Scan Activity
+- [ ] Mission Control activity feed
+- [ ] Other agents' WORKING.md files
+- [ ] Any blockers or issues?
+
+### Phase 4: Act or Stand Down
+**IF work found:**
+→ Do the work
+→ Update WORKING.md with progress
+→ Send replies if needed
+→ Archive processed messages
+
+**IF nothing to do:**
+→ Report `HEARTBEAT_OK`
+→ Go back to sleep
+
+---
+
 ## Communication Protocol
 
 ### Receiving Messages (On Heartbeat)

@@ -375,6 +375,61 @@ All agents have access to:
 
 ---
 
+## Heartbeat System
+
+**Schedule:** Every 15 minutes (staggered)
+
+| Agent | Minute | Status |
+|-------|--------|--------|
+| Jarvis | :00 | ✅ Active |
+| Shuri | :03 | ⚠️ File-based fallback |
+| Friday | :06 | ⚠️ File-based fallback |
+| Loki | :09 | ⚠️ File-based fallback |
+| Wong | :12 | ⚠️ File-based fallback |
+
+### Why Heartbeats?
+
+**Problem:** Always-on agents = expensive. Always-off = can't respond.  
+**Solution:** Wake every 15 min, check work, sleep.
+
+**Cost savings:** 98% reduction vs always-on.
+
+### What Happens During Heartbeat
+
+1. **Load Context**
+   - Read WORKING.md
+   - Read daily notes
+   - Check session memory
+
+2. **Check Urgent Items**
+   - Check inbox for messages
+   - Check Mission Control assignments
+   - Check @mentions
+
+3. **Scan Activity**
+   - Mission Control feed
+   - Other agents' status
+   - Relevant discussions
+
+4. **Take Action**
+   - Do work if found
+   - Update WORKING.md
+   - Reply to messages
+   - Or: HEARTBEAT_OK
+
+**Full protocol:** See `HEARTBEAT.md`
+
+### HEARTBEAT_OK
+
+When nothing needs attention:
+```
+HEARTBEAT_OK
+```
+
+This is GOOD — means no urgent work waiting.
+
+---
+
 ## Daily Standup
 
 **Time:** 07:00 AM Sydney Time  
