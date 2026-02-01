@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control — Amos's AI Squad</title>
+    <style>
+        :root {
+            --bg-primary: #0e0e10;
+            --bg-secondary: #141416;
+            --bg-elevated: #1c1c1f;
+            --border: #2a2a2e;
+            --text: #f0f0f0;
+            --text-muted: #8a8f98;
+            --accent: #5e6ad2;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --error: #f87171;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .card h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .agent-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .agent {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-elevated);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .agent-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .agent.jarvis .agent-avatar { background: #5e6ad2; }
+        .agent.shuri .agent-avatar { background: #ec4899; }
+        .agent.friday .agent-avatar { background: #10b981; }
+        .agent.loki .agent-avatar { background: #f59e0b; }
+        .agent.wong .agent-avatar { background: #8b5cf6; }
+        
+        .agent-info {
+            flex: 1;
+        }
+        
+        .agent-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .agent-role {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .agent-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .agent-status.active { background: var(--success); }
+        .agent-status.idle { background: var(--warning); }
+        .agent-status.offline { background: var(--text-muted); }
+        
+        .tasks {
+            margin-top: 2rem;
+        }
+        
+        .task {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-elevated);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 0.75rem;
+        }
+        
+        .task-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .task-status.done { background: rgba(74, 222, 128, 0.2); color: var(--success); }
+        .task-status.in_progress { background: rgba(94, 106, 210, 0.2); color: var(--accent); }
+        .task-status.inbox { background: rgba(139, 143, 152, 0.2); color: var(--text-muted); }
+        
+        .task-content {
+            flex: 1;
+        }
+        
+        .task-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .task-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .activity {
+            margin-top: 2rem;
+        }
+        
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-time {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            min-width: 80px;
+        }
+        
+        .activity-text {
+            font-size: 0.9rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 Mission Control</h1>
+        <p>Amos's AI Squad — Real-time Task Management</p>
+    </div>
+    
+    <div class="container">
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Active Agents</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Done Today</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">1</div>
+                <div class="stat-label">In Progress</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">3</div>
+                <div class="stat-label">In Backlog</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <h2>🤖 Agents</h2>
+                <div class="agent-list">
+                    <div class="agent jarvis">
+                        <div class="agent-avatar">J</div>
+                        <div class="agent-info">
+                            <div class="agent-name">Jarvis</div>
+                            <div class="agent-role">Squad Lead</div>
+                        </div>
+                        <div class="agent-status active"></div>
+                    </div>
+                    <div class="agent shuri">
+                        <div class="agent-avatar">S</div>
+                        <div class="agent-info">
+                            <div class="agent-name">Shuri</div>
+                            <div class="agent-role">Product Analyst</div>
+                        </div>
+                        <div class="agent-status idle"></div>
+                    </div>
+                    <div class="agent friday">
+                        <div class="agent-avatar">F</div>
+                        <div class="agent-info">
+                            <div class="agent-name">Friday</div>
+                            <div class="agent-role">Developer</div>
+                        </div>
+                        <div class="agent-status active"></div>
+                    </div>
+                    <div class="agent loki">
+                        <div class="agent-avatar">L</div>
+                        <div class="agent-info">
+                            <div class="agent-name">Loki</div>
+                            <div class="agent-role">Content Writer</div>
+                        </div>
+                        <div class="agent-status idle"></div>
+                    </div>
+                    <div class="agent wong">
+                        <div class="agent-avatar">W</div>
+                        <div class="agent-info">
+                            <div class="agent-name">Wong</div>
+                            <div class="agent-role">Documentation</div>
+                        </div>
+                        <div class="agent-status active"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>📊 System Status</h2>
+                <div style="margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>OpenClaw Gateway</span>
+                        <span style="color: var(--success);">🟢 Online</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Heartbeat System</span>
+                        <span style="color: var(--success);">🟢 Active</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Brave Search API</span>
+                        <span style="color: var(--success);">🟢 Connected</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Telegram Channel</span>
+                        <span style="color: var(--success);">🟢 Connected</span>
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+                    Last updated: <span id="last-update">2026-02-01 12:50 UTC</span>
+                </p>
+            </div>
+        </div>
+        
+        <div class="card tasks">
+            <h2>📝 Active Tasks</h2>
+            
+            <div class="task">
+                <span class="task-status done">Done</span>
+                <div class="task-content">
+                    <div class="task-title">Deploy CuanBoss Email System</div>
+                    <div class="task-meta">Friday • Auto-send order confirmations & seller notifications</div>
+                </div>
+            </div>
+            
+            <div class="task">
+                <span class="task-status done">Done</span>
+                <div class="task-content">
+                    <div class="task-title">Launch 2nd Brain</div>
+                    <div class="task-meta">Wong + Friday • Personal knowledge management system</div>
+                </div>
+            </div>
+            
+            <div class="task">
+                <span class="task-status in_progress">In Progress</span>
+                <div class="task-content">
+                    <div class="task-title">Setup Multi-Agent System</div>
+                    <div class="task-meta">Jarvis • 5-agent system with Mission Control</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card activity">
+            <h2>📈 Recent Activity</h2>
+            
+            <div class="activity-item">
+                <div class="activity-time">12:47</div>
+                <div class="activity-text"><strong>@jarvis</strong> started multi-agent system setup</div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-time">10:38</div>
+                <div class="activity-text"><strong>@friday</strong> deployed email notification system</div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-time">03:34</div>
+                <div class="activity-text"><strong>@wong</strong> created 2nd Brain initial content</div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-time">03:30</div>
+                <div class="activity-text"><strong>@friday</strong> built 2nd Brain Next.js app</div>
+            </div>
+        </div>
+        
+        <div class="card" style="margin-top: 2rem;">
+            <h2>🔗 Quick Links</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <a href="../../second-brain/dist/index.html">📚 2nd Brain</a>
+                <a href="./mission-control/TASKS.md">📋 Task Database</a>
+                <a href="../shared/AGENTS.md">📖 Operating Manual</a>
+                <a href="https://github.com/amosthiosa">🐙 GitHub</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-update timestamp
+        document.getElementById('last-update').textContent = new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+    </script>
+</body>
+</html>
