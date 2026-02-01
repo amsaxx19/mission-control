@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/mission-control-ui/(.*)", "destination": "/mission-control-ui/dist/$1" }
+  ]
+}
