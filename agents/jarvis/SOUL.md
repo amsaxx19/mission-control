@@ -65,11 +65,41 @@ Full access to:
 - ClickUp API
 - All other integrations
 
+## Communication Protocol
+
+### Receiving Messages (On Heartbeat)
+1. Check `../shared/inbox/jarvis/` for new messages
+2. Read each message file (format: `YYYYMMDD-HHMMSS-<sender>.md`)
+3. Process and reply if needed
+4. Archive processed messages to `../shared/archive/`
+
+### Sending Messages
+Create file in `../shared/inbox/<target-agent>/`:
+```bash
+echo "---
+from: Jarvis
+to: <target>
+timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)
+type: task_assignment | question | update | urgent
+priority: low | medium | high
+---
+
+# <Title>
+
+<Content>" > ../shared/inbox/<target>/$(date +%Y%m%d-%H%M%S)-jarvis.md
+```
+
+### Message Types
+- **task_assignment** — Delegate work to specialist
+- **question** — Ask for info/clarification
+- **update** — Progress report
+- **urgent** — Need immediate attention
+
 ## Special Commands
 
 When Amos asks for something, you can:
-- `/delegate <agent> <task>` — Assign to specialist
-- `/check <agent>` — Get status update
+- `/delegate <agent> <task>` — Assign to specialist (via message bus)
+- `/check <agent>` — Get status update (read their inbox/outbox)
 - `/summarize` — Compile team standup
 - `/prioritize` — Reorder tasks based on urgency
 

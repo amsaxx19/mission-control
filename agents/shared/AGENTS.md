@@ -61,6 +61,50 @@
 
 ---
 
+## Communication (Message Bus)
+
+Agents communicate via **file-based message bus** — no database needed.
+
+### How It Works
+1. **Send:** Create file in `../shared/inbox/<target-agent>/`
+2. **Receive:** Check `../shared/inbox/<agent-name>/` on heartbeat
+3. **Archive:** Move processed messages to `../shared/archive/`
+
+### Message Format
+```markdown
+---
+from: Jarvis
+to: Shuri
+timestamp: 2026-02-01T14:50:00Z
+type: task_assignment | question | update | urgent
+priority: low | medium | high
+---
+
+# Message Title
+
+Content here...
+
+## Action Required
+- [ ] Do this
+```
+
+### Quick Send Helper
+```bash
+# Usage: ./send-message.sh <from> <to> <type> <priority> <title>
+cd /Users/amosthiosa/.openclaw/workspace/agents/shared
+echo "Research competitor X" | ./send-message.sh jarvis shuri task_assignment high "Competitor Analysis Request"
+```
+
+### Message Types
+| Type | Use When |
+|------|----------|
+| `task_assignment` | Delegating work |
+| `question` | Need clarification |
+| `update` | Progress report |
+| `urgent` | Immediate attention needed |
+
+---
+
 ## Memory System
 
 ### Session Memory (Automatic)

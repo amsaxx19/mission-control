@@ -73,6 +73,7 @@ Create 5-agent system with Mission Control, heartbeats, and shared memory.
 - @jarvis: **WORKAROUND ATTEMPTED** — sessions_spawn requires configured agents (not allowed)
 - @jarvis: **RECOMMENDATION** — Need gateway restart or alternative architecture
 - @jarvis: Current session (13:30) proves heartbeat concept works — just scaling issue
+- @jarvis: **UPDATE 14:45** — Gateway restart blocked (restart disabled in config). Need manual intervention or config change.
 
 ---
 
@@ -127,6 +128,8 @@ Improve seller onboarding with guided steps and email sequences.
 
 ## Activity Feed
 
+**2026-02-01 14:45** — @jarvis: Heartbeat check — cron API still timing out, all agent heartbeats functional except scheduling new ones
+**2026-02-01 14:45** — @jarvis: Attempted gateway restart — blocked (restart disabled in config)
 **2026-02-01 13:45** — @jarvis: Heartbeat check — no new tasks, all systems nominal
 **2026-02-01 13:40** — @jarvis: Heartbeat check complete — reported cron timeout issue
 **2026-02-01 13:30** — @wong: Completed TikTok Affiliate SOP documentation  
