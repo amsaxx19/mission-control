@@ -9,12 +9,16 @@ import {
   Sparkles,
   LayoutDashboard,
   MessageSquare,
-  Settings
+  Settings,
+  Target,
+  TrendingUp,
+  Video
 } from 'lucide-react'
 import AgentCards from './components/AgentCards'
 import TaskBoard from './components/TaskBoard'
 import ActivityFeed from './components/ActivityFeed'
 import Stats from './components/Stats'
+import TikTokStrategy from './components/TikTokStrategy'
 
 function App() {
   const [agents, setAgents] = useState([])
@@ -62,7 +66,7 @@ function App() {
               <Sparkles className="w-6 h-6 text-primary/50 absolute -top-2 -right-2" />
             </div>
           </div>
-          <p className="text-muted-foreground animate-pulse">Initializing Mission Control...</p>
+          <p className="text-muted-foreground animate-pulse">Loading Mission Control...</p>
         </div>
       </div>
     )
@@ -72,6 +76,7 @@ function App() {
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'agents', label: 'Agents', icon: Users },
     { id: 'tasks', label: 'Tasks', icon: CheckCircle2 },
+    { id: 'tiktok', label: 'TikTok Strategy', icon: Video },
     { id: 'activity', label: 'Activity', icon: Activity },
   ]
 
@@ -128,7 +133,7 @@ function App() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 m-4 ml-4 overflow-auto">
+      <main className="flex-1 m-4 ml-4 overflow-auto min-w-0">
         {/* Header */}
         <header className="glass-card p-6 mb-6 flex items-center justify-between">
           <div>
@@ -181,6 +186,12 @@ function App() {
           {activeTab === 'tasks' && (
             <div className="space-y-6">
               <TaskBoard tasks={tasks} />
+            </div>
+          )}
+
+          {activeTab === 'tiktok' && (
+            <div className="space-y-6">
+              <TikTokStrategy />
             </div>
           )}
           

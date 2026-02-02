@@ -27,6 +27,18 @@
 
 ## Task Management System
 
+### WORKING.md — Current Status
+- **Location:** `WORKING.md` (root)
+- **Function:** Real-time work status, active projects, blockers, daily priorities
+- **Update:** Real-time as work progresses
+- **Status:** ACTIVE
+
+### Agent Memory System
+- **Location:** `memory/agents/`
+- **Files:** `loki-memory.md`, `shuri-memory.md`, `friday-memory.md`, `wong-memory.md`
+- **Function:** Setiap agent baca memory file sendiri saat di-spawn, update saat selesai kerja
+- **Status:** ACTIVE — semua agent punya memory file lengkap
+
 ### ClickUp Integration
 - **API Key:** Stored in `.clickup.env` (chmod 600, never commit)
 - **Skill Location:** `skills/clickup/SKILL.md`

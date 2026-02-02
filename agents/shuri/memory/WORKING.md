@@ -1,38 +1,48 @@
 # WORKING.md — Shuri
 
 ## Current Task
-TikTok Affiliate Competitor Research
+**SUPER FAST MODE: TikTok & CuanBoss Intelligence**
 
 ## Status
-🔄 IN PROGRESS — Due tomorrow 12:00 PM Sydney time
+🔄 IN PROGRESS — Due Feb 4, 12 PM (48 hours)
 
-## Research Scope
-1. **Local Competitors:** Top TikTok affiliate creators in Indonesia
-2. **Platform Analysis:** Kalodata vs alternatives
-3. **Strategy Documentation:** What makes them successful
+## Access ✅
+- Kalodata: Ready (Amos has account)
+- Research tools: Ready
+- Output: Notion
 
-## Progress
-- [x] Received assignment from Jarvis (message in inbox)
-- [ ] Identify 5-10 top creators
-- [ ] Analyze their content strategy
-- [ ] Document tools they use
-- [ ] Compile findings report
+## Deliverables (48 Hours)
 
-## Evidence Collected
-*None yet — research starting*
+### 1. TikTok Competitor Deep-Dive
+- [ ] Top 20 TikTok affiliates Indonesia
+- [ ] Content patterns, hooks, engagement metrics
+- [ ] Big Mo & Timothy Ronald analysis
 
-## Next Steps
-1. Search for top TikTok affiliate creators in Indonesia
-2. Review their profiles, content frequency, engagement
-3. Check what tools they mention/use
-4. Document in structured format
+### 2. Product Margin Analysis
+- [ ] Current products: books, hair dye, nasal spray, children's books
+- [ ] Max profit category identification
+- [ ] Underserved niches
 
-## Output Expected
-- Competitor list with metrics
-- Strategy analysis
-- Tool comparison
-- Recommendations for Amos
+### 3. Artis/Selebgram Collab Targets
+- [ ] 50 target creators (tiered)
+- [ ] DM templates
+- [ ] Outreach strategy
+
+### 4. CuanBoss Competitor Analysis
+- [ ] Whop.com, Gumroad analysis
+- [ ] Local Indonesian platforms
+- [ ] Pricing & positioning gaps
+
+## Timeline
+- **Today 6 PM:** 25% progress check
+- **Tomorrow 9 AM:** 50% progress check
+- **Tomorrow 6 PM:** 75% progress check
+- **Feb 4, 9 AM:** 90% progress check
+- **Feb 4, 12 PM:** FINAL DELIVERY
+
+## Output
+Push all reports to Notion: "Shuri — TikTok Intelligence Report"
 
 ---
 
-*Last Updated: 2026-02-01 14:50 UTC by Shuri*
+**SUPER FAST MODE ACTIVATED. No delays. Full focus. Go.**

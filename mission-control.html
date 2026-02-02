@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f8f8;
+            --bg-tertiary: #f2f2f2;
+            --border: #e6e6e6;
+            --border-light: #f0f0f0;
+            --text-primary: #111111;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --accent-blue: #3b82f6;
+            --accent-green: #22c55e;
+            --accent-yellow: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --accent-red: #ef4444;
+            --radius: 8px;
+            --radius-lg: 12px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        
+        /* Layout */
+        .app {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: var(--bg-primary);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 16px 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 12px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--text-primary);
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .nav-section {
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+        
+        .nav-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-tertiary);
+            padding: 8px 12px;
+            margin-bottom: 4px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .nav-item:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .nav-item.active {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+        
+        .nav-item svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* Main Content */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            height: 60px;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .header-badge {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: var(--bg-tertiary);
+            border-radius: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+        
+        .btn-primary {
+            background: var(--text-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-danger {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+        
+        .btn-danger:hover {
+            background: #fee2e2;
+        }
+        
+        /* Content */
+        .content {
+            flex: 1;
+            overflow: auto;
+            padding: 24px;
+        }
+        
+        .view {
+            display: none;
+        }
+        
+        .view.active {
+            display: block;
+        }
+        
+        /* Stats Row */
+        .stats-bar {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background 0.15s;
+        }
+        
+        .stat:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* Kanban */
+        .kanban {
+            display: flex;
+            gap: 20px;
+            min-width: fit-content;
+        }
+        
+        .column {
+            width: 300px;
+            flex-shrink: 0;
+        }
+        
+        .column-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .column-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .column-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .dot-backlog { background: var(--text-tertiary); }
+        .dot-assigned { background: var(--accent-purple); }
+        .dot-progress { background: var(--accent-yellow); }
+        .dot-done { background: var(--accent-green); }
+        
+        .column-count {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+        
+        .tasks {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .task {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        
+        .task:hover {
+            border-color: var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transform: translateY(-1px);
+        }
+        
+        .task.dragging {
+            opacity: 0.5;
+        }
+        
+        .task-id {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .task-title {
+            font-size: 13px;
+            color: var(--text-primary);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        
+        .task-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .task-agent {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .agent-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+        
+        .task-priority {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .priority-high {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+        
+        .priority-medium {
+            background: #fffbeb;
+            color: #d97706;
+        }
+        
+        .priority-low {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+        
+        /* Agents Section */
+        .section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .agent-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+        
+        .agent-card:hover {
+            border-color: var(--border);
+            background: var(--bg-secondary);
+        }
+        
+        .agent-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .agent-icon.jarvis { background: #eff6ff; }
+        .agent-icon.shuri { background: #fdf2f8; }
+        .agent-icon.friday { background: #f0fdf4; }
+        .agent-icon.loki { background: #fffbeb; }
+        .agent-icon.wong { background: #faf5ff; }
+        
+        .agent-info {
+            flex: 1;
+        }
+        
+        .agent-name {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .agent-role {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .agent-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .status-active { background: var(--accent-green); }
+        .status-busy { background: var(--accent-yellow); }
+        .status-idle { background: var(--text-tertiary); }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .modal-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 4px;
+        }
+        
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+        }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-light);
+            background: var(--bg-secondary);
+        }
+        
+        /* Task Detail */
+        .task-detail h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            margin-top: 16px;
+        }
+        
+        .task-detail p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Deliverables Grid */
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        
+        .deliverable-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .deliverable-card:hover {
+            border-color: var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .deliverable-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .deliverable-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .deliverable-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        
+        .deliverable-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .empty-state h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .empty-state p {
+            font-size: 14px;
+        }
+        
+        /* Icons */
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--text-primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo" onclick="showView('dashboard')">
+                    <div class="logo-icon">◆</div>
+                    <span>Mission Control</span>
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-label">Menu</div>
+                <button class="nav-item active" onclick="showView('dashboard')" data-view="dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    Dashboard
+                </button>
+                <button class="nav-item" onclick="showView('tasks')" data-view="tasks">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                    Tasks
+                </button>
+                <button class="nav-item" onclick="showView('agents')" data-view="agents">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    Agents
+                </button>
+                <button class="nav-item" onclick="showView('deliverables')" data-view="deliverables">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                    Deliverables
+                </button>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-label">Links</div>
+                <button class="nav-item" onclick="openNotion()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                    Notion
+                </button>
+                <button class="nav-item" onclick="openGitHub()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    GitHub
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main -->
+        <main class="main">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1 class="header-title" id="page-title">Dashboard</h1>
+                    <span class="header-badge" id="task-count">32 tasks</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" onclick="refreshData()">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                        Refresh
+                    </button>
+                    <button class="btn btn-primary" onclick="openNewTaskModal()">+ New Task</button>
+                </div>
+            </header>
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- Dashboard View -->
+                <div class="view active" id="view-dashboard">
+                    <!-- Stats -->
+                    <div class="stats-bar">
+                        <div class="stat" onclick="filterByStatus('done')">
+                            <div class="stat-value" id="stat-done">12</div>
+                            <div class="stat-label">Done</div>
+                        </div>
+                        <div class="stat" onclick="filterByStatus('in_progress')">
+                            <div class="stat-value" id="stat-progress">4</div>
+                            <div class="stat-label">In Progress</div>
+                        </div>
+                        <div class="stat" onclick="filterByStatus('backlog')">
+                            <div class="stat-value" id="stat-backlog">8</div>
+                            <div class="stat-label">Backlog</div>
+                        </div>
+                        <div class="stat" onclick="filterByStatus('assigned')">
+                            <div class="stat-value" id="stat-assigned">8</div>
+                            <div class="stat-label">Assigned</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Agents -->
+                    <div class="section">
+                        <div class="section-header">
+                            <div class="section-title">Agents</div>
+                            <button class="btn btn-secondary" onclick="showView('agents')">View All</button>
+                        </div>
+                        <div class="agents-grid">
+                            <div class="agent-card" onclick="showAgentDetail('jarvis')">
+                                <div class="agent-icon jarvis">🤖</div>
+                                <div class="agent-info">
+                                    <div class="agent-name">Jarvis</div>
+                                    <div class="agent-role">System / Main</div>
+                                </div>
+                                <div class="agent-status status-active"></div>
+                            </div>
+                            <div class="agent-card" onclick="showAgentDetail('shuri')">
+                                <div class="agent-icon shuri">🔬</div>
+                                <div class="agent-info">
+                                    <div class="agent-name">Shuri</div>
+                                    <div class="agent-role">Product Analyst</div>
+                                </div>
+                                <div class="agent-status status-active"></div>
+                            </div>
+                            <div class="agent-card" onclick="showAgentDetail('friday')">
+                                <div class="agent-icon friday">💻</div>
+                                <div class="agent-info">
+                                    <div class="agent-name">Friday</div>
+                                    <div class="agent-role">Developer</div>
+                                </div>
+                                <div class="agent-status status-busy"></div>
+                            </div>
+                            <div class="agent-card" onclick="showAgentDetail('loki')">
+                                <div class="agent-icon loki">✍️</div>
+                                <div class="agent-info">
+                                    <div class="agent-name">Loki</div>
+                                    <div class="agent-role">Content Writer</div>
+                                </div>
+                                <div class="agent-status status-active"></div>
+                            </div>
+                            <div class="agent-card" onclick="showAgentDetail('wong')">
+                                <div class="agent-icon wong">📚</div>
+                                <div class="agent-info">
+                                    <div class="agent-name">Wong</div>
+                                    <div class="agent-role">Documentation</div>
+                                </div>
+                                <div class="agent-status status-busy"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Tasks -->
+                    <div class="section">
+                        <div class="section-header">
+                            <div class="section-title">Recent Tasks</div>
+                            <button class="btn btn-secondary" onclick="showView('tasks')">View All</button>
+                        </div>
+                        <div class="kanban" style="overflow-x: auto;">
+                            <!-- Done -->
+                            <div class="column">
+                                <div class="column-header">
+                                    <div class="column-title">
+                                        <div class="column-dot dot-done"></div>
+                                        Done
+                                    </div>
+                                    <div class="column-count">12</div>
+                                </div>
+                                <div class="tasks" id="done-tasks">
+                                    <!-- Tasks injected by JS -->
+                                </div>
+                            </div>
+                            
+                            <!-- In Progress -->
+                            <div class="column">
+                                <div class="column-header">
+                                    <div class="column-title">
+                                        <div class="column-dot dot-progress"></div>
+                                        In Progress
+                                    </div>
+                                    <div class="column-count">4</div>
+                                </div>
+                                <div class="tasks" id="progress-tasks">
+                                    <!-- Tasks injected by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tasks View -->
+                <div class="view" id="view-tasks">
+                    <div class="kanban">
+                        <!-- Backlog -->
+                        <div class="column">
+                            <div class="column-header">
+                                <div class="column-title">
+                                    <div class="column-dot dot-backlog"></div>
+                                    Backlog
+                                </div>
+                                <div class="column-count" id="count-backlog">8</div>
+                            </div>
+                            <div class="tasks" id="column-backlog"></div>
+                        </div>
+                        
+                        <!-- Assigned -->
+                        <div class="column">
+                            <div class="column-header">
+                                <div class="column-title">
+                                    <div class="column-dot dot-assigned"></div>
+                                    Assigned
+                                </div>
+                                <div class="column-count" id="count-assigned">8</div>
+                            </div>
+                            <div class="tasks" id="column-assigned"></div>
+                        </div>
+                        
+                        <!-- In Progress -->
+                        <div class="column">
+                            <div class="column-header">
+                                <div class="column-title">
+                                    <div class="column-dot dot-progress"></div>
+                                    In Progress
+                                </div>
+                                <div class="column-count" id="count-progress">4</div>
+                            </div>
+                            <div class="tasks" id="column-progress"></div>
+                        </div>
+                        
+                        <!-- Done -->
+                        <div class="column">
+                            <div class="column-header">
+                                <div class="column-title">
+                                    <div class="column-dot dot-done"></div>
+                                    Done
+                                </div>
+                                <div class="column-count" id="count-done">12</div>
+                            </div>
+                            <div class="tasks" id="column-done"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Agents View -->
+                <div class="view" id="view-agents">
+                    <div class="section">
+                        <div class="section-header">
+                            <div class="section-title">All Agents</div>
+                        </div>
+                        <div class="agents-grid" id="agents-list">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Deliverables View -->
+                <div class="view" id="view-deliverables">
+                    <div class="deliverables-grid" id="deliverables-list">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- New Task Modal -->
+    <div class="modal-overlay" id="new-task-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">New Task</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Task Title</label>
+                    <input type="text" class="form-input" id="new-task-title" placeholder="Enter task title...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Assignee</label>
+                    <select class="form-select" id="new-task-agent">
+                        <option value="Jarvis">Jarvis</option>
+                        <option value="Shuri">Shuri</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Loki">Loki</option>
+                        <option value="Wong">Wong</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" id="new-task-status">
+                        <option value="backlog">Backlog</option>
+                        <option value="assigned">Assigned</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="new-task-priority">
+                        <option value="high">High</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="createTask()">Create Task</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Task Detail Modal -->
+    <div class="modal-overlay" id="task-detail-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="detail-task-title">Task Detail</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="task-detail">
+                    <p id="detail-task-desc">Task description...</p>
+                    
+                    <h3>Actions</h3>
+                    <div style="display: flex; gap: 8px; margin-top: 12px;">
+                        <button class="btn btn-secondary" onclick="moveTask('backlog')">Move to Backlog</button>
+                        <button class="btn btn-secondary" onclick="moveTask('in_progress')">Start Progress</button>
+                        <button class="btn btn-primary" onclick="moveTask('done')">Mark Done</button>
+                        <button class="btn btn-danger" onclick="deleteTask()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // Data
+        let tasks = [
+            { id: 'FEB2-001', title: '90 Viral Hooks Complete', status: 'done', priority: 'high', agent: 'Shuri' },
+            { id: 'FEB2-002', title: 'Day 1 Series Scripts (10 Episodes)', status: 'done', priority: 'high', agent: 'Loki' },
+            { id: 'FEB2-003', title: 'TikTok Competitor Report', status: 'done', priority: 'high', agent: 'Shuri' },
+            { id: 'FEB2-004', title: 'CuanBoss Landing Page Copy', status: 'done', priority: 'medium', agent: 'Loki' },
+            { id: 'FEB2-005', title: '20 Variasi Script FYP', status: 'done', priority: 'high', agent: 'Shuri' },
+            { id: 'FEB2-006', title: 'Product Analysis Top 20', status: 'done', priority: 'medium', agent: 'Shuri' },
+            { id: 'FEB2-007', title: 'Push All to Notion', status: 'done', priority: 'high', agent: 'System' },
+            { id: 'FEB2-008', title: 'Mission Control UI', status: 'done', priority: 'medium', agent: 'Friday' },
+            { id: 'WIP-001', title: 'CuanBoss MVP Deployment', status: 'in_progress', priority: 'high', agent: 'Friday' },
+            { id: 'WIP-002', title: 'Morning Briefing Automation', status: 'in_progress', priority: 'medium', agent: 'Friday' },
+            { id: 'WIP-003', title: 'SOP Documentation for Adek', status: 'in_progress', priority: 'medium', agent: 'Wong' },
+            { id: 'WIP-004', title: 'Payment Gateway Integration', status: 'in_progress', priority: 'high', agent: 'Friday' },
+            { id: 'BACK-001', title: 'TikTok Content Automation', status: 'backlog', priority: 'high', agent: 'Friday' },
+            { id: 'BACK-002', title: 'Kalodata Daily Scraper', status: 'backlog', priority: 'high', agent: 'Friday' },
+            { id: 'BACK-003', title: 'CuanBoss Seller Onboarding', status: 'backlog', priority: 'high', agent: 'Friday' },
+            { id: 'BACK-004', title: 'Adek Training Modules', status: 'backlog', priority: 'medium', agent: 'Wong' },
+            { id: 'BACK-005', title: 'Competitor Monitoring Alert', status: 'backlog', priority: 'medium', agent: 'Shuri' },
+            { id: 'BACK-006', title: 'WhatsApp Business API', status: 'backlog', priority: 'medium', agent: 'Friday' },
+            { id: 'ICE-001', title: 'YouTube Automation Pipeline', status: 'assigned', priority: 'low', agent: 'Loki' },
+            { id: 'ICE-002', title: 'Mobile App for CuanBoss', status: 'assigned', priority: 'low', agent: 'Friday' },
+        ];
+        
+        const agents = [
+            { id: 'jarvis', name: 'Jarvis', role: 'System / Main', status: 'active', icon: '🤖', color: 'jarvis' },
+            { id: 'shuri', name: 'Shuri', role: 'Product Analyst', status: 'active', icon: '🔬', color: 'shuri' },
+            { id: 'friday', name: 'Friday', role: 'Developer', status: 'busy', icon: '💻', color: 'friday' },
+            { id: 'loki', name: 'Loki', role: 'Content Writer', status: 'active', icon: '✍️', color: 'loki' },
+            { id: 'wong', name: 'Wong', role: 'Documentation', status: 'busy', icon: '📚', color: 'wong' },
+        ];
+        
+        const deliverables = [
+            { icon: '🎣', title: '90 Viral Hooks', desc: 'Complete hook library for TikTok content', file: '90-viral-hooks.md' },
+            { icon: '🎬', title: 'Day 1 Series Scripts', desc: '10 episode scripts for founder journey', file: 'day-1-series-scripts.md' },
+            { icon: '🔍', title: 'Competitor Intelligence', desc: 'Full TikTok competitor analysis', file: 'shuri-competitor-intelligence-report.md' },
+            { icon: '📝', title: 'Landing Page Copy', desc: 'CuanBoss website copy', file: 'cuanboss-landing-copy.md' },
+            { icon: '🎬', title: '20 Variasi Script', desc: 'FYP-optimized script variations', file: '20-variasi-script-fyp.md' },
+            { icon: '📊', title: 'Product Analysis', desc: 'Top 20 products performance', file: 'product-analysis-top20.md' },
+        ];
+        
+        let currentTaskId = null;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTasks();
+            renderAgents();
+            renderDeliverables();
+            updateStats();
+        });
+        
+        // View Navigation
+        function showView(viewName) {
+            // Hide all views
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            // Show selected view
+            document.getElementById(`view-${viewName}`).classList.add('active');
+            document.querySelector(`[data-view="${viewName}"]`)?.classList.add('active');
+            
+            // Update title
+            const titles = {
+                dashboard: 'Dashboard',
+                tasks: 'Task Board',
+                agents: 'Agents',
+                deliverables: 'Deliverables'
+            };
+            document.getElementById('page-title').textContent = titles[viewName];
+        }
+        
+        // Render Tasks
+        function renderTasks() {
+            const columns = {
+                backlog: document.getElementById('column-backlog'),
+                assigned: document.getElementById('column-assigned'),
+                in_progress: document.getElementById('column-progress'),
+                done: document.getElementById('column-done'),
+            };
+            
+            // Clear columns
+            Object.values(columns).forEach(col => col.innerHTML = '');
+            
+            // Render tasks
+            tasks.forEach(task => {
+                const taskEl = createTaskElement(task);
+                if (columns[task.status]) {
+                    columns[task.status].appendChild(taskEl);
+                }
+            });
+            
+            // Update counts
+            document.getElementById('count-backlog').textContent = tasks.filter(t => t.status === 'backlog').length;
+            document.getElementById('count-assigned').textContent = tasks.filter(t => t.status === 'assigned').length;
+            document.getElementById('count-progress').textContent = tasks.filter(t => t.status === 'in_progress').length;
+            document.getElementById('count-done').textContent = tasks.filter(t => t.status === 'done').length;
+            
+            // Render recent tasks for dashboard
+            renderRecentTasks();
+        }
+        
+        function renderRecentTasks() {
+            const doneContainer = document.getElementById('done-tasks');
+            const progressContainer = document.getElementById('progress-tasks');
+            
+            if (doneContainer) {
+                doneContainer.innerHTML = '';
+                tasks.filter(t => t.status === 'done').slice(0, 3).forEach(task => {
+                    doneContainer.appendChild(createTaskElement(task));
+                });
+            }
+            
+            if (progressContainer) {
+                progressContainer.innerHTML = '';
+                tasks.filter(t => t.status === 'in_progress').forEach(task => {
+                    progressContainer.appendChild(createTaskElement(task));
+                });
+            }
+        }
+        
+        function createTaskElement(task) {
+            const div = document.createElement('div');
+            div.className = 'task';
+            div.onclick = () => openTaskDetail(task.id);
+            div.innerHTML = `
+                <div class="task-id">${task.id}</div>
+                <div class="task-title">${task.title}</div>
+                <div class="task-meta">
+                    <div class="task-agent">
+                        <div class="agent-avatar">${task.agent[0]}</div>
+                        ${task.agent}
+                    </div>
+                    <span class="task-priority priority-${task.priority}">${task.priority}</span>
+                </div>
+            `;
+            return div;
+        }
+        
+        // Render Agents
+        function renderAgents() {
+            const container = document.getElementById('agents-list');
+            if (!container) return;
+            
+            container.innerHTML = agents.map(agent => `
+                <div class="agent-card" onclick="showAgentDetail('${agent.id}')">
+                    <div class="agent-icon ${agent.color}">${agent.icon}</div>
+                    <div class="agent-info">
+                        <div class="agent-name">${agent.name}</div>
+                        <div class="agent-role">${agent.role}</div>
+                    </div>
+                    <div class="agent-status status-${agent.status}"></div>
+                </div>
+            `).join('');
+        }
+        
+        // Render Deliverables
+        function renderDeliverables() {
+            const container = document.getElementById('deliverables-list');
+            if (!container) return;
+            
+            container.innerHTML = deliverables.map(d => `
+                <div class="deliverable-card" onclick="openDeliverable('${d.file}')">
+                    <div class="deliverable-icon">${d.icon}</div>
+                    <div class="deliverable-title">${d.title}</div>
+                    <div class="deliverable-desc">${d.desc}</div>
+                    <div class="deliverable-meta">
+                        <span>📄 ${d.file}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Update Stats
+        function updateStats() {
+            document.getElementById('stat-done').textContent = tasks.filter(t => t.status === 'done').length;
+            document.getElementById('stat-progress').textContent = tasks.filter(t => t.status === 'in_progress').length;
+            document.getElementById('stat-backlog').textContent = tasks.filter(t => t.status === 'backlog').length;
+            document.getElementById('stat-assigned').textContent = tasks.filter(t => t.status === 'assigned').length;
+            document.getElementById('task-count').textContent = `${tasks.length} tasks`;
+        }
+        
+        // Modal Functions
+        function openNewTaskModal() {
+            document.getElementById('new-task-modal').classList.add('active');
+        }
+        
+        function openTaskDetail(taskId) {
+            currentTaskId = taskId;
+            const task = tasks.find(t => t.id === taskId);
+            if (task) {
+                document.getElementById('detail-task-title').textContent = task.title;
+                document.getElementById('detail-task-desc').textContent = `Task ${task.id} assigned to ${task.agent}. Status: ${task.status}, Priority: ${task.priority}`;
+                document.getElementById('task-detail-modal').classList.add('active');
+            }
+        }
+        
+        function closeModal() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+            currentTaskId = null;
+        }
+        
+        function createTask() {
+            const title = document.getElementById('new-task-title').value;
+            const agent = document.getElementById('new-task-agent').value;
+            const status = document.getElementById('new-task-status').value;
+            const priority = document.getElementById('new-task-priority').value;
+            
+            if (!title) {
+                showToast('Please enter a task title');
+                return;
+            }
+            
+            const newTask = {
+                id: `TASK-${Date.now().toString().slice(-4)}`,
+                title,
+                status,
+                priority,
+                agent
+            };
+            
+            tasks.push(newTask);
+            renderTasks();
+            updateStats();
+            closeModal();
+            showToast('Task created successfully');
+            
+            // Clear form
+            document.getElementById('new-task-title').value = '';
+        }
+        
+        function moveTask(newStatus) {
+            if (!currentTaskId) return;
+            
+            const task = tasks.find(t => t.id === currentTaskId);
+            if (task) {
+                task.status = newStatus;
+                renderTasks();
+                updateStats();
+                closeModal();
+                showToast(`Task moved to ${newStatus.replace('_', ' ')}`);
+            }
+        }
+        
+        function deleteTask() {
+            if (!currentTaskId) return;
+            
+            tasks = tasks.filter(t => t.id !== currentTaskId);
+            renderTasks();
+            updateStats();
+            closeModal();
+            showToast('Task deleted');
+        }
+        
+        // Agent Detail
+        function showAgentDetail(agentId) {
+            const agent = agents.find(a => a.id === agentId);
+            if (agent) {
+                const agentTasks = tasks.filter(t => t.agent === agent.name);
+                showToast(`${agent.name}: ${agentTasks.length} tasks assigned`);
+            }
+        }
+        
+        // Filter
+        function filterByStatus(status) {
+            showView('tasks');
+            showToast(`Filtered by: ${status.replace('_', ' ')}`);
+        }
+        
+        // External Links
+        function openNotion() {
+            window.open('https://notion.so', '_blank');
+        }
+        
+        function openGitHub() {
+            window.open('https://github.com', '_blank');
+        }
+        
+        function openDeliverable(filename) {
+            showToast(`Opening ${filename}...`);
+        }
+        
+        // Refresh
+        function refreshData() {
+            renderTasks();
+            updateStats();
+            showToast('Data refreshed');
+        }
+        
+        // Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+        
+        // Close modal on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeModal();
+            });
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'n' && e.ctrlKey) {
+                e.preventDefault();
+                openNewTaskModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+.env.notion
+scripts/push*.js
+scripts/create-notion-page.js

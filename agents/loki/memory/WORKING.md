@@ -1,32 +1,65 @@
 # WORKING.md — Loki
 
 ## Current Task
-Awaiting content assignments
+**SUPER FAST MODE: Content Factory**
 
 ## Status
-⏳ IDLE — No active content tasks
+🔄 IN PROGRESS — Due Feb 4, 12 PM (48 hours)
 
-## Completed Today
-- ✅ CuanBoss Landing Page Copy — 4 headline variants, value props, FAQ
-- ✅ Personal Brand Week 1 Calendar — 7-day content plan
+## Access ✅
+- Writing tools: Ready
+- Output: Notion
 
-## Backlog
-- Marketing email sequences
-- Social media content
-- Blog posts
-- Website copy updates
+## Deliverables (48 Hours)
 
-## Voice & Tone Reminders
-- Pro-Oxford comma ✅
-- Anti-passive voice ✅
-- Active, punchy sentences
-- Every word earns its place
+### A. TikTok Content (PRIORITY #1)
 
-## Next Steps
-1. Check inbox for new assignments
-2. Review Message Bus for content requests
-3. Await direction from Jarvis/Amos
+**1. Day 1 Series Scripts — 10 Episodes**
+- [ ] Day 1: Resign from Australia
+- [ ] Day 15: Packing
+- [ ] Day 30: Last day
+- [ ] Landing Day
+- [ ] Week 1: Culture shock
+- [ ] Month 1: First CuanBoss revenue
+- [ ] Month 2: Struggle & pivot
+- [ ] Month 3: Breakthrough
+- [ ] Q1 Review
+- [ ] 100K Celebration (projected)
+
+**2. 90 Viral Hooks — Ready to Record**
+- [ ] 30 Anti-Kabur hooks
+- [ ] 30 Founder Journey hooks
+- [ ] 30 Product hooks
+
+**3. 30-Day Content Calendar**
+- [ ] 60 scripts for @amosfounder (2x daily)
+- [ ] 120 scripts for @amosthiosa (4x daily)
+- [ ] All hooks, captions, hashtags
+
+### B. CuanBoss Marketing
+
+**1. Landing Page Copy — 5 Pages**
+- [ ] Homepage
+- [ ] Seller onboarding
+- [ ] Buyer flow
+- [ ] Pricing
+- [ ] About/Founder story
+
+**2. Email Sequences**
+- [ ] Welcome series (5 emails)
+- [ ] Seller activation (7 emails)
+- [ ] Abandoned cart (3 emails)
+
+## Timeline
+- **Today 6 PM:** 25% progress check
+- **Tomorrow 9 AM:** 50% progress check
+- **Tomorrow 6 PM:** 75% progress check
+- **Feb 4, 9 AM:** 90% progress check
+- **Feb 4, 12 PM:** FINAL DELIVERY
+
+## Output
+Push to Notion: "Loki — Content Factory Output"
 
 ---
 
-*Last Updated: 2026-02-01 14:50 UTC by Loki*
+**SUPER FAST MODE ACTIVATED. Scripts must be record-ready. No placeholders. Go.**
